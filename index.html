@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Source | Intelligent Provider Selection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="logo">
+                <h1>Admin</h1>
+            </div>
+        </header>
+
+        <main class="content-wrapper">
+            <!-- INPUT SECTION -->
+            <section class="input-panel card">
+                <h2><i class="fa-solid fa-plus-circle"></i> Add Provider</h2>
+                <form id="providerForm">
+                    <div class="form-group">
+                        <label for="providerName">Name</label>
+                        <input type="text" id="providerName" placeholder="" required>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="price">Price per unit</label>
+                            <div class="input-icon">
+                                <i class="fa-solid fa-dollar-sign"></i>
+                                <input type="number" id="price" placeholder="0.00" min="0" step="0.01" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quality">Quality Score</label>
+                            <div class="input-icon">
+                                <i class="fa-solid fa-star"></i>
+                                <input type="number" id="quality" placeholder="1-10" min="1" max="10" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="time">Shipping Time</label>
+                            <div class="input-icon">
+                                <i class="fa-solid fa-truck-fast"></i>
+                                <input type="number" id="time" placeholder="Days" min="0" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="capacity">Max Capacity</label>
+                            <div class="input-icon">
+                                <i class="fa-solid fa-boxes-stacked"></i>
+                                <input type="number" id="capacity" placeholder="Units" min="0" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+                </form>
+            </section>
+
+            <!-- RESULTS SECTION -->
+            <section class="results-panel">
+                <div class="panel-header">
+                    <h2><i class="fa-solid fa-list-check"></i> Providers List (<span id="count">0</span>)</h2>
+                    <div class="actions">
+                        <button id="calculateBtn" class="btn-action">
+                            <i class="fa-solid fa-calculator"></i> Find Best
+                        </button>
+                        <button id="resetBtn" class="btn-secondary">
+                            <i class="fa-solid fa-rotate-right"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TABLE VIEW (Primary View) -->
+                <div id="tableContainer" class="table-container card">
+                    <div class="table-responsive">
+                        <table id="providersTable">
+                            <thead>
+                                <tr>
+                                    <th>Provider Name</th>
+                                    <th>Price/Unit</th>
+                                    <th>Quality Score</th>
+                                    <th>Shipping Time</th>
+                                    <th>Max Capacity</th>
+                                    <th>Final Score</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Rows will be injected here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="emptyState" class="empty-state">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        <p>No providers added yet. Start by adding one above.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <!-- Modal for Best Option -->
+    <div id="winnerModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="winner-animation">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h2>Best Option Found!</h2>
+            <div id="winnerDetails"></div>
+            <button class="btn-primary close-btn">Make Deal</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
