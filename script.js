@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // State
     let providers = [];
     let editingId = null;
+    let providerChart = null;
 
     // DOM Elements
     const form = document.getElementById('providerForm');
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const winnerModal = document.getElementById('winnerModal');
     const winnerDetails = document.getElementById('winnerDetails');
     const closeModalElements = document.querySelectorAll('.close-modal, .close-btn');
+    const dashboardSection = document.getElementById('dashboardSection');
 
     // Event Listeners
     form.addEventListener('submit', handleFormSubmit);
@@ -72,6 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
         renderProviders();
         form.reset();
         document.getElementById('providerName').focus();
+
+        // Hide dashboard if data changes
+        dashboardSection.classList.add('hidden');
     }
 
     function editProvider(id) {
@@ -100,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         providers = providers.filter(p => p.id !== id);
         renderProviders();
+        dashboardSection.classList.add('hidden');
     }
 
     function calculateBestOption() {
@@ -126,7 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalScore = priceScore + qualityScore + timeScore + capacityScore;
             return {
                 ...p,
-                score: parseFloat(totalScore.toFixed(1))
+                score: parseFloat(totalScore.toFixed(1)),
+                breakdown: [priceScore, qualityScore, timeScore, capacityScore]
             };
         });
 
@@ -135,7 +142,87 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         renderProviders(bestProvider.id);
+        updateChart();
         showWinnerModal(bestProvider);
+    }
+
+    function updateChart() {
+        dashboardSection.classList.remove('hidden');
+        const ctx = document.getElementById('providerChart').getContext('2d');
+
+        if (providerChart) {
+            providerChart.destroy();
+        }
+
+        const sortedProviders = [...providers].sort((a, b) => b.score - a.score);
+
+        providerChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: sortedProviders.map(p => p.name),
+                datasets: [
+                    {
+                        label: 'Price Score (30%)',
+                        data: sortedProviders.map(p => p.breakdown[0].toFixed(1)),
+                        backgroundColor: '#34D399',
+                    },
+                    {
+                        label: 'Quality Score (35%)',
+                        data: sortedProviders.map(p => p.breakdown[1].toFixed(1)),
+                        backgroundColor: '#10B981',
+                    },
+                    {
+                        label: 'Time Score (20%)',
+                        data: sortedProviders.map(p => p.breakdown[2].toFixed(1)),
+                        backgroundColor: '#059669',
+                    },
+                    {
+                        label: 'Capacity Score (15%)',
+                        data: sortedProviders.map(p => p.breakdown[3].toFixed(1)),
+                        backgroundColor: '#F59E0B',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                            font: {
+                                family: "'Outfit', sans-serif",
+                                size: 12
+                            }
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: '#1F2937',
+                        titleFont: { family: "'Outfit', sans-serif" },
+                        bodyFont: { family: "'Outfit', sans-serif" }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { display: false }
+                    },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Overall Performance Score'
+                        }
+                    }
+                }
+            }
+        });
     }
 
     function resetApp() {
@@ -146,6 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
             form.reset();
             submitBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
             formTitle.innerHTML = '<i class="fa-solid fa-plus-circle"></i> Add Provider';
+            dashboardSection.classList.add('hidden');
         }
     }
 

@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -108,6 +109,17 @@
                     <div id="emptyState" class="empty-state">
                         <i class="fa-solid fa-clipboard-list"></i>
                         <p>No providers added yet. Start by adding one above.</p>
+                    </div>
+                </div>
+
+                <!-- DASHBOARD SECTION -->
+                <div id="dashboardSection" class="dashboard-container card hidden">
+                    <div class="dashboard-header">
+                        <h2><i class="fa-solid fa-chart-pie"></i> Provider Comparison Analysis</h2>
+                        <p>Visualizing the scoring breakdown across all potential candidates.</p>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="providerChart"></canvas>
                     </div>
                 </div>
             </section>
