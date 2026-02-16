@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Source | Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="logout-container">
+            <a href="#" id="logoutBtn" class="btn-logout">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+        <header class="main-header">
+            <h1><i class="fa-solid fa-database"></i> Input Data from Provider</h1>
+            <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
+                <a href="users_manage.html" class="btn-action" style="background: #3B82F6; text-decoration: none; padding: 10px 20px; border-radius: 8px;">
+                    <i class="fa-solid fa-users-gear"></i> User Management
+                </a>
+        <button id="deleteAllBtn" class="btn-action" style="background: #EF4444;">
+            <i class="fa-solid fa-dumpster-fire"></i> Delete all
+        </button>
+    </div>
+        </header>
+        <main class="content-wrapper">
+            <section class="input-panel card">
+                <h2>Add Supplier</h2>
+
+                <form id="providerForm">
+                    <input type="hidden" id="editId" value="">
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <div class="input-icon">
+                            <i class="fa-solid fa-signature"></i>
+                            <input type="text" id="providerName" placeholder="Provider Name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Price ($)</label>
+                            <div class="input-icon">
+                                <i class="fa-solid fa-dollar-sign"></i>
+                                <input type="number" id="price" min="0" step="0.01" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Quality (1-10)</label>
+                            <div class="input-icon">
+                                <i class="fa-solid fa-star"></i>
+                                <input type="number" id="quality" min="1" max="10" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Time (Days)</label>
+                            <div class="input-icon">
+                                <i class="fa-solid fa-truck-fast"></i>
+                                <input type="number" id="time" min="0" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Capacity</label>
+                            <div class="input-icon">
+                                <i class="fa-solid fa-boxes-stacked"></i>
+                                <input type="number" id="capacity" min="0" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button type="submit" id="submitBtn" class="btn-primary" style="flex: 2;">Save</button>
+                        <button type="button" id="cancelEditBtn" class="btn-secondary hidden" style="flex: 1; margin-top: 1.5rem;">Cancel</button>
+                    </div>
+                </form>
+            </section>
+            <section class="results-panel card">
+                <h2>Current Suppliers (<span id="count">0</span>)</h2>
+                <div class="table-container">
+                    <table id="providersTable">
+                        <thead><tr><th>Name</th><th>Price</th><th>Qual</th><th>Time</th><th>Cap</th><th>Act</th></tr></thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

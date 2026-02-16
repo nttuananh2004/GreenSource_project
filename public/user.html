@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Source | User</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="logout-container">
+            <a href="#" id="logoutBtn" class="btn-logout">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+
+        <header class="main-header">
+            <h1><i class="fa-solid fa-calculator"></i> Optimization Engine</h1>
+        </header>
+
+        <main class="content-wrapper">
+            <section class="input-panel card">
+                <h2>Config</h2>
+                <form id="optimizationForm">
+                    <div class="form-group">
+                        <label>Demand</label>
+                        <div class="input-icon"><i class="fa-solid fa-cart-shopping"></i><input type="number" id="totalUnits"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Min Score</label>
+                        <div class="input-icon"><i class="fa-solid fa-chart-line"></i><input type="number" id="minScore" value="0.52" step="0.01"></div>
+                    </div>
+                    
+                    <div class="priority-sliders">
+                        <label>Priorities (Total: <span id="totalPercent">100</span>%)</label>
+                        
+                        <div class="slider-group">
+                            <label>Price</label>
+                            <input type="range" id="wPrice" value="50" min="0" max="100">
+                            <span id="valPrice" class="weight-value">50%</span>
+                        </div>
+
+                        <div class="slider-group">
+                            <label>Quality</label>
+                            <input type="range" id="wQuality" value="30" min="0" max="100">
+                            <span id="valQuality" class="weight-value">30%</span>
+                        </div>
+
+                        <div class="slider-group">
+                            <label>Time</label>
+                            <input type="range" id="wTime" value="20" min="0" max="100">
+                            <span id="valTime" class="weight-value">20%</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Run & Save</button>
+                </form>
+            </section>
+
+            <section class="results-panel">
+                <div id="resultsContainer" class="hidden">
+                    <div class="result-summary">
+                        <div class="summary-card"><h4>Cost</h4><div id="resTotalCost" class="val">-</div></div>
+                        <div class="summary-card"><h4>Avg Score</h4><div id="resAvgScore" class="val">-</div></div>
+                        <div class="summary-card"><h4>Status</h4><div id="resStatus" class="val">-</div></div>
+                    </div>
+                    <div class="table-container card">
+                        <table>
+                            <thead><tr><th>Provider</th><th>Price</th><th>Cap</th><th>Allocated</th><th>Total</th><th>%</th></tr></thead>
+                            <tbody id="resultTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

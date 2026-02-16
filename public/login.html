@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Source | Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hidden { display: none; }
+        .toggle-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .toggle-link a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .toggle-link a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="display: flex; align-items: center; justify-content: center;">
+    <div class="card" style="width: 100%; max-width: 420px; padding: 2.5rem;">
+        <div class="logo">
+            <i class="fa-solid fa-leaf" style="color: var(--primary-color);"></i>
+            <h1 style="font-size: 2rem;">Green Source</h1>
+        </div>
+        
+        <div id="loginContainer">
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">Sign in to continue</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="input-icon">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="loginUser" placeholder="Username" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="loginPass" placeholder="Password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Login <i class="fa-solid fa-arrow-right"></i></button>
+            </form>
+            <div class="toggle-link">
+                Don't have an account? <a id="showRegister">Register here</a>
+            </div>
+        </div>
+
+        <div id="registerContainer" class="hidden">
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">Create new account</p>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="input-icon">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="regUser" placeholder="Choose username" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="regPass" placeholder="Create password" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <div class="input-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="regEmail" placeholder="name@example.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <div class="input-icon">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="tel" id="regPhone" placeholder="Phone number" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" style="background: var(--text-dark);">Register User</button>
+            </form>
+            <div class="toggle-link">
+                Already have an account? <a id="showLogin">Login here</a>
+            </div>
+        </div>
+
+        <p id="authMessage" style="color: red; text-align: center; margin-top: 1rem; display: none;"></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
