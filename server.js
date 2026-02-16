@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = ProcessingInstruction.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // KẾT NỐI DATABASE
-const dbPath = path.resolve(__dirname, 'supplier_eval.db');
+const dbPath = path.join(__dirname, 'supplier_eval.db');
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) console.error('Lỗi kết nối DB:', err.message);
     else {
